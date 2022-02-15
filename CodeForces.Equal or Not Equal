@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+ 
+int main (){
+    int t;
+    char s[51];
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n_count = 0;
+        scanf("%s", s);
+        for (int i = 0; s[i]!='\0'; i++){
+            if (s[i] == 'N'){
+                n_count++;
+            }
+        }
+        if (n_count!=1){
+            printf("YES\n");
+        }
+        else{
+            printf("NO\n");
+        }
+ 
+    }
+    return 0;
+ 
+}
