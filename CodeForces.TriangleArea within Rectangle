@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+int main (){
+    int num_count;
+    scanf ("%d", &num_count);
+    while (num_count){
+        double corner_x, corner_y;
+        scanf("%lf %lf", &corner_x, &corner_y); //Taking the corners fuck yeah oh oh yeah fuck yeah
+        double num_zy, coord_zy1, coord_zy2, zy_dif;   //Taking the two coordinates, they are the only one that matters here
+        scanf("%lf %lf", &num_zy, &coord_zy1); //Just realized i will have to make an algorithm to sort out the biggest
+        //printf("%lf", num_zy);                 //multiplication
+        while (num_zy!=1){
+            scanf("%lf", &coord_zy2);
+            num_zy--;
+        }
+        zy_dif = coord_zy2 - coord_zy1;   //This badboy is the difference, the base of the triangle
+        //printf("\n%lf %lf and finally %lf\n", coord_zy1, coord_zy2, zy_dif);
+        double num_hy, coord_hy1, coord_hy2, hy_dif;   
+        scanf("%lf %lf", &num_hy, &coord_hy1); 
+        //printf("%lf", num_hy);                
+        while (num_hy!=1){
+            scanf("%lf", &coord_hy2);
+            num_hy--;
+        }
+        hy_dif = coord_hy2 - coord_hy1;   
+        //printf("\n%lf %lf and finally %lf\n", coord_hy1, coord_hy2, hy_dif);
+
+        double num_zx, coord_zx1, coord_zx2, zx_dif;   
+        scanf("%lf %lf", &num_zx, &coord_zx1); 
+        //printf("%lf", num_zx);                 
+        while (num_zx!=1){
+            scanf("%lf", &coord_zx2);
+            num_zx--;
+        }
+        zx_dif = coord_zx2 - coord_zx1;   
+        //printf("\n%lf %lf and finally %lf\n", coord_zx1, coord_zx2, zx_dif);
+
+        double num_wx, coord_wx1, coord_wx2, wx_dif;   
+        scanf("%lf %lf", &num_wx, &coord_wx1); 
+        //printf("%lf", num_wx);                 
+        while (num_wx!=1){
+            scanf("%lf", &coord_wx2);
+            num_wx--;
+        }
+        wx_dif = coord_wx2 - coord_wx1;   
+        //printf("\n%lf %lf and finally %lf\n", coord_wx1, coord_wx2, wx_dif);
+        //Alright. We need to multiply the bases with the triangles heights and define the biggest one
+        double area_zy, area_hy, area_zx, area_wx;
+        area_zy = zy_dif * corner_y;
+        area_hy = hy_dif * corner_y;
+        area_zx = zx_dif * corner_x;
+        area_wx = wx_dif * corner_x;
+
+        double area[4] = {area_zy, area_hy, area_zx, area_wx};
+        int j =3;
+        while (j >= 0){
+            if (area[j] > area [j-1]){
+                area [j-1] = area [j];
+                j--;
+            }
+            else{
+                j--;
+            }
+        }
+        double end_area;
+        end_area = area[0];
+        printf("%.0lf\n", end_area);
+
+
+        num_count--;
+    }
+
+    return 0;
+}
