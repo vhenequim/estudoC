@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+void lamp_status_checker(bool *lampArray){
+    for (int i = 0; i < 32; i++){
+        printf(lampArray[i] ? "T " : "F ");
+        
+    }
+    puts ("\n");
+}
+
+int position_placer(){
+    int position;
+    printf ("Which position?\n");
+    scanf ("%d", &position);
+    return position;
+}
+
+void turn_light_on (bool *lampArray, int position){
+    lampArray[position-1] = true;
+}
+
+void turn_light_off (bool *lampArray, int position){
+    lampArray[position-1] = false;
+}
+
+void turn_sequence_on (bool *lampArray, int position){
+    for (int i = position - 1; i != position + 7; i++){
+        lampArray[i] = true;
+    }
+}
+
+void count_lamps_on(bool *lampArray){
+    int num_lamps_on = 0;
+    for (int i = 0; i != 32; i++){
+        if (lampArray[i] == true){
+            num_lamps_on++;
+        }
+    }
+    printf("There are %d lamps on!\n", num_lamps_on);
+}
+
+int main(){
+    bool lampArray[32];
+    for (int i = 0; i < 32; i++){
+        lampArray[i] = false;
+    } // defining the lamps, all turned off
+    bool is_prog_on = true;
+    int option;
+    while (is_prog_on){ //itineration to make programm always repeat, function's names explain themselves
+        printf ("Which option do you want?\n 1- turn light on\n 2- turn light off\n 3- turn 8 lights on in sequence\n 4- count how many lamps are on\n");
+        scanf(" %d", &option);
+        switch (option){
+        case 0:
+            is_prog_on = false;
+            break;
+        case 1:
+            turn_light_on(lampArray, position_placer());
+            break;
+        case 2:
+            turn_light_off(lampArray, position_placer());
+            break;
+        case 3:
+            turn_sequence_on(lampArray, position_placer());
+            break;
+        case 4:
+            count_lamps_on(lampArray);
+            break;
+        default:
+            lamp_status_checker(lampArray);
+            break;
+        }
+    }
+    printf("\nBye");
+    return 0;
+}
